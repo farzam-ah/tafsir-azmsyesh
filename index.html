@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تفسیر آزمایش خون</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+      integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N"
+      crossorigin="anonymous"
+    />
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url(Vazir.ttf);
+      }
+      * {
+        font-family: vazir;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div id="app" >
+      <div class="container ">
+        <form action="">
+          <div class="row col-md-7 m-auto mt-5">
+            <label for="select-1" class="text-start mb-3"
+              >ازمایش مورد نظر خود را انتخاب نمایید</label
+            >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              id="select-1"
+              v-model="selected"
+            >
+              >
+
+              <option value="1" class="text-center">fe (iron)</option>
+              <option value="2" class="text-center">zn (zinc)</option>
+              <option value="3" class="text-center">ca (calcium)</option>
+            </select>
+          </div>
+        </form>
+        <!-- condition start  -->
+        <!-- fe condition  -->
+        <div class="row col-md-4 mt-5 m-auto" v-if="selected == 1">
+          <p style="direction: rtl">
+            مقدار fe(iron) موجود در ازمایش را وارد کنید
+          </p>
+          {{ fenum+" "+"µg/dL" }}
+          <input type="number" min="1" max="10000" v-model="fenum" />
+          <div
+            v-if="fenum <= 155 && fenum >= 40"
+            class="text-success text-center mt-5 display-4"
+          >
+            <h1>نرمال</h1>
+          </div>
+          <div v-else-if="fenum > 127 " class="text-danger text-center mt-5">
+            <h1>Iron Toxicity</h1>
+            <p class="rounded-3 bg-danger text-warning">
+              مسمومیت با اهن<br />مصرف مکمل اهن و غذاهای حاوی اهن را قطع کرده و
+              سریعا به پزشک مراجعه نمایید
+            </p>
+          </div>
+          <div v-else-if="fenum < 72 " class="text-danger text-center mt-5">
+            <h1>کم خونی</h1>
+            <p class="rounded-3 bg-danger text-warning">
+              مصرف مواد غذایی سرشار از اهن مانند :عدس ،لوبیا سفید ، جگر گاو
+            </p>
+          </div>
+        </div>
+        <!-- zn condition  -->
+        <div class="row col-md-4 mt-5 m-auto" v-if="selected == 2">
+          <p style="direction: rtl">
+            مقدار zn (zinc) موجود در ازمایش را وارد کنید
+          </p>
+          {{ znum+" "+"µg/dL" }}
+          <input type="number" min="1" max="10000" v-model="znum" />
+          <div
+            v-if="znum <= 127 && znum >= 72"
+            class="text-success text-center mt-5 display-4"
+          >
+            <h1>نرمال</h1>
+          </div>
+          <div v-else-if="znum > 127 " class="text-danger text-center mt-5">
+            <h1>Zinc toxicity</h1>
+            <p class="rounded-3 bg-danger text-warning">
+              مسمومیت با زینک<br />مصرف مکمل زینک و غذاهای حاوی زینک را قطع کرده
+              و سریعا به پزشک مراجعه نمایید
+            </p>
+          </div>
+          <div v-else-if="znum < 72 " class="text-danger text-center mt-5">
+            <h1>کمبود زینک</h1>
+            <p class="rounded-3 bg-danger text-warning">
+              مصرف مواد غذایی سرشار از زینک مانند :گوشت ،حبوبات ،لبنیات
+            </p>
+          </div>
+        </div>
+        <!-- ca condition  -->
+        <div class="row col-md-4 mt-5 m-auto" v-if="selected == 3">
+          <p style="direction: rtl">
+            مقدار ca(calcium) موجود در ازمایش را وارد کنید
+          </p>
+          {{ canum+" "+"mg/dL" }}
+          <input type="number" min="1" max="10000" v-model="canum" />
+          <div
+            v-if="canum <= 10 && canum >= 8"
+            class="text-success text-center mt-5 display-4"
+          >
+            <h1>نرمال</h1>
+          </div>
+          <div v-else-if="canum > 10 " class="text-danger text-center mt-5">
+            <h1>Hypercalcemia</h1>
+            <p class="rounded-3 bg-danger text-warning">
+              کلسیم بالا<br />مصرف مکمل کلسیم و غذاهای حاوی کلسیم را قطع کرده و
+              سریعا به پزشک مراجعه نمایید
+            </p>
+          </div>
+          <div v-else-if="canum < 8 " class="text-danger text-center mt-5">
+            <h1>کمبود کلسیم</h1>
+            <p class="rounded-3 bg-danger text-warning">
+              مصرف مواد غذایی سرشار از کلسیم مانند :لبنیات ، بروکلی و دانه‌های کنجد 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- javascript  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          canum: 8,
+          znum: 72,
+          fenum: 40,
+          numv: null,
+          selected: null,
+
+          check1: null,
+        },
+      });
+    </script>
+  </body>
+</html>
